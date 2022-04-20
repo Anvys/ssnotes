@@ -1,25 +1,19 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Note from "./conponents/Note/Note";
+import NoteListContainer from "./conponents/NoteList/NoteListContainer";
+import AddNoteModalContainer from "./conponents/AddNoteModal/AddNoteModalContainer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+function App(props) {
+    return (
+        <div className="wrapper">
+            <div className="App">
+                <AddNoteModalContainer/>
+                <NoteListContainer/>
+            </div>
+        </div>
+    );
 }
 
 export default App;

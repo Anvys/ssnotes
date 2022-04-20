@@ -1,0 +1,63 @@
+.Note{
+    background-color: #79b5cb;
+    width: 200px;
+    height: 200px;
+    padding: 5px;
+    border: 3px solid #cca9a9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /*flex-wrap: wrap;*/
+    overflow: hidden;
+}
+.header{
+    font-style: italic;
+    font-size: 20px;
+}
+.content{}
+.edit{
+    display: flex;
+    gap: 5px;
+
+}
+
+.description{
+    background-color: #79b5cb;
+    font-size: 28px;
+    word-wrap: break-word;
+}
+
+.dateStart{
+    font-size: 14px;
+}
+
+.delButton, .editButton{
+    padding: 5px;
+    border: 1px solid black;
+}
+.delButton{
+
+}
+.delButton:hover{
+background-color: #e56565;
+}
+.delButton:active{
+    background-color: #dc1111;
+}
+.editButton{
+
+}
+.editButton:hover{
+    background-color: #a4a49f;
+}
+.editButton:active{
+    background-color: #e1cd42;
+}
+
+
+.addNewContent{
+
+}
+.addNewDiv{
+font-size: 150px;
+}
