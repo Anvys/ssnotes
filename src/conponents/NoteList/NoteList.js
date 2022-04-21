@@ -18,6 +18,10 @@ const NoteList = (props) => {
                             deleteNote={props.deleteNote}
                             editNote = {props.editNote}
                             saveEditedNote = {props.saveEditedNote}
+                            setImg = {props.setImg}
+                            updateDescFont={props.updateDescFont}
+                            updateTitleFont={props.updateTitleFont}
+                            // addNote = {props.addNote}
                         />
                     )
                 }

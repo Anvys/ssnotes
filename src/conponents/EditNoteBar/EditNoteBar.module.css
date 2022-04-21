@@ -1,0 +1,90 @@
+.bar{
+    display: flex;
+    margin: 7px 0;
+    gap: 4px;
+}
+
+
+.load_img_input{
+    opacity: 0;
+    width: 0;
+
+}
+.imgLabel{
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: 7px 3px;
+    font-size: 16px;
+    background-color: #a6ab65;
+}
+.imgLabel:hover{
+    background-color: #b4bb46;
+}
+.imgLabel:active{
+    background-color: #e3ef0d;
+}
+/*.imgLabel*/
+/*.load_img_input::before{*/
+/*    border: 1px solid black;*/
+/*    border-radius: 50%;*/
+/*}*/
+
+.styleBtn{
+    font-size: 22px;
+    text-align: center;
+    width: 30px;
+    border: 1px solid black;
+    box-shadow: 2px 2px 2px 2px black;
+}
+
+.styleBtnAct, .styleBtn:active{
+    font-size: 22px;
+    text-align: center;
+    width: 30px;
+    background-color: #727272;
+    position: relative;
+    top: 2px;
+    left: 2px;
+    border: 1px solid black;
+    box-shadow: 1px 1px 1px 1px black;
+
+}
+.radioDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 3px;
+    /*justify-content: right;*/
+}
+.radioLabel{
+    font-size: 14px;
+    /*margin: 0px 5px 0px 0px;*/
+}
+.radio{
+    /*margin: 0px 0px 0px 2px;*/
+    /*height: 15px;*/
+    display: flex;
+    justify-content: right;
+
+}
+.radio *:last-child{
+    margin: 0px 0px 0px 4px;
+}
+.radioradio{
+    height: 80%;
+}
+
+.bold{
+    font-weight: bold;
+}
+.italic{
+    font-style: italic;
+}
+.underline{
+    text-decoration: underline;
+}
+.lineThrough{
+    text-decoration: line-through;
+}
+
+

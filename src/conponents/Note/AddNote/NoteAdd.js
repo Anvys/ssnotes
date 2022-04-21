@@ -5,11 +5,12 @@ import addLogo from "./../../../assets/img/icons/add.svg"
 
 const NoteAdd = (props) => {
     const activateModalHandler = () => props.editInProgress ? alert('Сохраните редактируемую заметку') : props.showAddNoteModal();
+    const onAddNote = () => props.editInProgress ? alert('Сохраните редактируемую заметку') :props.addNote();
     return (
         <div className={styles.Note}>
             <div className={styles.header}>Добавить заметку</div>
             <div className={styles.addNewContent}>
-                <div className={styles.addNewDiv} onClick={activateModalHandler}></div>
+                <div className={styles.addNewDiv} onClick={onAddNote}></div>
             </div>
         </div>
     );

@@ -6,9 +6,6 @@ const AddNoteModal = (props) => {
     const addNoneHandler = e => props.addNote();
     const onTitleChangeHandler = e => props.updateTitle(e.target.value);
     const onDescChangeHandler = e => props.updateDesc(e.target.value);
-    // debugger
-    console.log(`${styles.modalHide} ${styles.modalHide}`);
-    console.log(`${styles.contentHide} ${styles.contentHide}`);
     return (
         <div className={props.isActive?styles.modal:`${styles.modal} ${styles.modalHide}`} onClick={props.hideModal}>
             <div className={styles.modHeader}>Добавляем новую заметку!</div>

@@ -7,7 +7,7 @@ const SideBar = (props) => {
     return (
         <div className={styles.block}>
             <div className={styles.sideBar}>
-                <NoteAdd showAddNoteModal={props.showAddNoteModal } editInProgress={props.editInProgress}/>
+                <NoteAdd addNote={props.addNote} showAddNoteModal={props.showAddNoteModal } editInProgress={props.editInProgress}/>
             </div>
         </div>
 

@@ -1,24 +1,32 @@
 const ADD_NOTE = 'ADD_NOTE'
+const ADD_NOTE2 = 'ADD_NOTE2'
 const HIDE_ADD_NOTE_MODAL = 'HIDE_ADD_NOTE_MODAL'
 const SHOW_ADD_NOTE_MODAL = 'SHOW_ADD_NOTE_MODAL'
 const UPDATE_NOTE_DESC = 'UPDATE_NOTE_DESC'
 const UPDATE_NOTE_TITLE = 'UPDATE_NOTE_TITLE'
 const UPDATE_NEW_NOTE_DESC = 'UPDATE_NEW_NOTE_DESC'
 const UPDATE_NEW_NOTE_TITLE = 'UPDATE_NEW_NOTE_TITLE'
+
 const DELETE_NOTE = 'DELETE_NOTE'
 const EMPTY_DESC = 'EMPTY_DESC'
 const EDIT_NOTE = 'EDIT_NOTE'
 const SAVE_EDITED_NOTE = 'SAVE_EDITED_NOTE'
+const SET_IMG = 'SET_IMG'
+const UPDATE_DESC_FONTS = 'UPDATE_DESC_FONTS'
+const UPDATE_TITLE_FONTS = 'UPDATE_TITLE_FONTS'
 
 
 export const addNoteAC = () => {
-    return {type: ADD_NOTE} ;
+    return {type: ADD_NOTE};
+}
+export const addNote2AC = () => {
+    return {type: ADD_NOTE2};
 }
 export const editNoteAC = (id) => {
-    return {type: EDIT_NOTE, id} ;
+    return {type: EDIT_NOTE, id};
 }
 export const saveEditedNoteAC = (id) => {
-    return {type: SAVE_EDITED_NOTE, id} ;
+    return {type: SAVE_EDITED_NOTE, id};
 }
 export const updateNoteDescAC = (description, id) => {
     return {type: UPDATE_NOTE_DESC, description, id};
@@ -41,9 +49,35 @@ export const hideAddNoteModalAC = () => {
 export const showAddNoteModalAC = () => {
     return {type: SHOW_ADD_NOTE_MODAL};
 }
+export const setImgAC = (img, id) => {
+    return {type: SET_IMG, img, id};
+}
+export const updateDescFontsAC = (fonts, id) => {
+    return {type: UPDATE_DESC_FONTS, fonts, id};
+}
+export const updateTitleFontsAC = (fonts, id) => {
+    return {type: UPDATE_TITLE_FONTS, fonts, id};
+}
 
-const createNoteObj = (id, title, description, dateStart=new Date(), isDone=false, edit=false) => (
-    {id, title, description, dateStart:dateStart.toLocaleString(), isDone, edit}
+
+const createNoteObj = (id, title, description, dateStart = new Date(), isDone = false, edit = false) => (
+    {
+        id, title, description, dateStart: dateStart.toLocaleString(), isDone, edit, img: null, titleFont: {
+            bold: false,
+            italic: true,
+            underline: true,
+            lineThrough: false,
+            fontSize: 20,
+            fontFamily: 'Arial'
+        }, descFont: {
+            bold: false,
+            italic: false,
+            underline: false,
+            lineThrough: false,
+            fontSize: 18,
+            fontFamily: 'Arial'
+        },
+    }
 );
 const defNotesObj = {
     notes: [
@@ -69,7 +103,9 @@ let returnNewState = (newState) => {
     return newState;
 }
 
-let defaultState = localStorage.getItem('notes')===(null || 'undefined') ? initStorage() : JSON.parse(localStorage.getItem('notes'))
+let defaultState = (localStorage.getItem('notes') === null ||
+    localStorage.getItem('notes') === 'undefined') ?
+    initStorage() : JSON.parse(localStorage.getItem('notes'))
 // let defaultState = initStorage();
 
 const notesReducer = (state = defaultState, action) => {
@@ -82,7 +118,7 @@ const notesReducer = (state = defaultState, action) => {
                 ...state,
                 notes: [
                     ...state.notes.map((note, id) => ({...note, id: id})),
-                    createNoteObj(state.notes.length + 1, state.newNoteTitle,state.newNoteDesc)
+                    createNoteObj(state.notes.length + 1, state.newNoteTitle, state.newNoteDesc)
                     // {id: state.notes.length + 1,title: state.newNoteTitle, description: state.newNoteDesc, isDone: false},
                 ],
                 newNoteDesc: "",
@@ -90,7 +126,21 @@ const notesReducer = (state = defaultState, action) => {
                 addNoteModalActive: false,
             })
         }
-        case EDIT_NOTE:{
+        case ADD_NOTE2: {
+            return returnNewState({
+                ...state,
+                notes: [
+                    ...state.notes.map((note, id) => ({...note, id: id})),
+                    {...createNoteObj(state.notes.length + 1, state.newNoteTitle, state.newNoteDesc), edit: true}
+                    // {id: state.notes.length + 1,title: state.newNoteTitle, description: state.newNoteDesc, isDone: false},
+                ],
+                newNoteDesc: "",
+                newNoteTitle: "",
+                addNoteModalActive: false,
+                editInProgress: true
+            })
+        }
+        case EDIT_NOTE: {
             return returnNewState({
                 ...state,
                 notes: state.notes.map((note, id) => (action.id === note.id ?
@@ -99,7 +149,7 @@ const notesReducer = (state = defaultState, action) => {
                 editInProgress: true
             })
         }
-        case SAVE_EDITED_NOTE:{
+        case SAVE_EDITED_NOTE: {
             return returnNewState({
                 ...state,
                 notes: state.notes.map((note, id) => (action.id === note.id ?
@@ -108,17 +158,42 @@ const notesReducer = (state = defaultState, action) => {
                 editInProgress: false
             })
         }
-        case HIDE_ADD_NOTE_MODAL:{
-            return returnNewState({...state,addNoteModalActive: false});
+        case HIDE_ADD_NOTE_MODAL: {
+            return returnNewState({...state, addNoteModalActive: false});
         }
-        case SHOW_ADD_NOTE_MODAL:{
-            return returnNewState({...state,addNoteModalActive: true});
+        case SHOW_ADD_NOTE_MODAL: {
+            return returnNewState({...state, addNoteModalActive: true});
         }
         case UPDATE_NOTE_DESC: {
             return returnNewState({
                 ...state,
                 notes: state.notes.map((note, id) => (action.id === note.id ?
                         {...note, description: action.description} : note
+                ))
+            });
+        }
+        case UPDATE_DESC_FONTS: {
+            return returnNewState({
+                ...state,
+                notes: state.notes.map((note, id) => (action.id === note.id ?
+                        {...note, descFont: {...action.fonts}} : note
+                ))
+            });
+        }
+        case UPDATE_TITLE_FONTS: {
+            return returnNewState({
+                ...state,
+                notes: state.notes.map((note, id) => (action.id === note.id ?
+                        {...note, titleFont: {...action.fonts}} : note
+                ))
+            });
+        }
+        case SET_IMG: {
+
+            return returnNewState({
+                ...state,
+                notes: state.notes.map((note, id) => (action.id === note.id ?
+                        {...note, img: action.img} : note
                 ))
             });
         }
@@ -146,7 +221,7 @@ const notesReducer = (state = defaultState, action) => {
             return returnNewState({
                 ...state,
                 notes: state.notes.filter((note, id) => action.id !== note.id),
-                editInProgress: state.notes.find(note => note.id===action.id).edit===true ? false : state.editInProgress
+                editInProgress: state.notes.find(note => note.id === action.id).edit === true ? false : state.editInProgress
             });
         }
         default: {
