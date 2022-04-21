@@ -35,6 +35,7 @@ html, body, #root{
 .wrapper {
   min-height: 100%;
   overflow: hidden;
+  display: flex;
 }
 
 [class$=__flexRowsContainer]{
@@ -47,11 +48,9 @@ html, body, #root{
 }
 
 .App {
-  width: 1000px;
+  width: 100%;
   margin: 0 auto;
-  /*display: flex;*/
-  /*text-align: center;*/
-  /*background-color: #3b3839;*/
-  /*height: 100%;*/
+  display: flex;
+  gap: 20px;
 }
 

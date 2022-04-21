@@ -10,12 +10,24 @@
     /*flex-wrap: wrap;*/
     overflow: hidden;
 }
+.NoteEditing{
+    border: 8px dashed #af3434;
+    width: 400px;
+    height: 400px;
+}
 .header{
+    background-color: #79b5cb;
     font-style: italic;
     font-size: 20px;
+    pointer-events: none;
+
+}
+.headerEditing{
+    pointer-events: all;
+    background-color: #a4a49f;
 }
 .content{}
-.edit{
+.footer{
     display: flex;
     gap: 5px;
 
@@ -25,6 +37,12 @@
     background-color: #79b5cb;
     font-size: 28px;
     word-wrap: break-word;
+    pointer-events: none;
+}
+.descriptionEditing{
+    pointer-events: all;
+    background-color: #a4a49f;
+
 }
 
 .dateStart{
@@ -35,6 +53,7 @@
     padding: 5px;
     border: 1px solid black;
 }
+
 .delButton{
 
 }
@@ -44,6 +63,7 @@ background-color: #e56565;
 .delButton:active{
     background-color: #dc1111;
 }
+
 .editButton{
 
 }

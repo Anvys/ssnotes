@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
     isActive:state.NotesPage.addNoteModalActive,
     title: state.NotesPage.newNoteTitle,
     desc: state.NotesPage.newNoteDesc,
+
 })
 const mapDispatchToProps = dispatch => ({
     hideModal: () => dispatch(hideAddNoteModalAC()),

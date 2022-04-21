@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styles from './NoteAdd.module.css';
 import addLogo from "./../../../assets/img/icons/add.svg"
 
-const Note = (props) => {
-    const activateModalHandler = () => props.showAddNoteModal();
+const NoteAdd = (props) => {
+    const activateModalHandler = () => props.editInProgress ? alert('Сохраните редактируемую заметку') : props.showAddNoteModal();
     return (
         <div className={styles.Note}>
             <div className={styles.header}>Добавить заметку</div>
@@ -15,9 +15,9 @@ const Note = (props) => {
     );
 }
 
-Note.propTypes = {
+NoteAdd.propTypes = {
     description: PropTypes.string
 
 };
 
-export default Note;
+export default NoteAdd;

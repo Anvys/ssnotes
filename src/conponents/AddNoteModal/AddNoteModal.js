@@ -11,18 +11,24 @@ const AddNoteModal = (props) => {
     console.log(`${styles.contentHide} ${styles.contentHide}`);
     return (
         <div className={props.isActive?styles.modal:`${styles.modal} ${styles.modalHide}`} onClick={props.hideModal}>
+            <div className={styles.modHeader}>Добавляем новую заметку!</div>
             <div className={props.isActive?styles.content:`${styles.content} ${styles.contentHide}`} onClick={e=>e.stopPropagation()}>
-                MODAL
                 <div className={styles.title}>
-                    <label htmlFor={styles.inputHeader}>Введите заголовок</label>
+                    {/*<label htmlFor={styles.inputHeader}>Введите заголовок</label>*/}
                     <input id={styles.inputHeader}
+                           className={styles.inputHeader}
                            placeholder={"Заголовок"}
                            value={props.title}
                            onChange={onTitleChangeHandler}/>
                 </div>
                 <div className={styles.desc}>
-                    <label htmlFor={styles.inputDesc}>Введите описание</label>
-                    <input id={styles.inputDesc}
+                    {/*<label htmlFor={styles.inputDesc}>Введите описание</label>*/}
+                    {/*<input id={styles.inputDesc}*/}
+                    {/*       placeholder={"текст заметки"}*/}
+                    {/*       value={props.desc}*/}
+                    {/*       onChange={onDescChangeHandler}/>*/}
+                    <textarea id={styles.inputDesc}
+                              className={styles.inputDesc}
                            placeholder={"текст заметки"}
                            value={props.desc}
                            onChange={onDescChangeHandler}/>
