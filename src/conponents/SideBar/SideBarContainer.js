@@ -5,7 +5,6 @@ import {addNote2AC, deleteNoteAC, showAddNoteModalAC, updateNoteDescAC} from "..
 
 
 const mapStateToProps = state => ({
-    notesArr:state.NotesPage.notes,
     editInProgress: state.NotesPage.editInProgress,
 })
 const mapDispatchToProps = dispatch => ({

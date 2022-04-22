@@ -1,24 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './NoteAdd.module.css';
-import addLogo from "./../../../assets/img/icons/add.svg"
+
 
 const NoteAdd = (props) => {
-    const activateModalHandler = () => props.editInProgress ? alert('Сохраните редактируемую заметку') : props.showAddNoteModal();
     const onAddNote = () => props.editInProgress ? alert('Сохраните редактируемую заметку') :props.addNote();
     return (
-        <div className={styles.Note}>
-            <div className={styles.header}>Добавить заметку</div>
-            <div className={styles.addNewContent}>
-                <div className={styles.addNewDiv} onClick={onAddNote}></div>
+        <div className={styles.block}>
+            <div className={styles.addButton}>
+                <i className={styles.image} onClick={onAddNote}></i>
             </div>
         </div>
     );
 }
 
 NoteAdd.propTypes = {
-    description: PropTypes.string
-
+    editInProgress: PropTypes.bool,
+    noteAdd: PropTypes.func
 };
 
 export default NoteAdd;

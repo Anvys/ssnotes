@@ -6,7 +6,7 @@ import {
     updateNewNoteDescAC,
     updateNewNoteTitleAC,
     updateNoteDescAC
-} from "../../redux/reducers/notesReducer";
+} from "../../../redux/reducers/notesReducer";
 import AddNoteModal from "./AddNoteModal";
 
 const mapStateToProps = state => ({

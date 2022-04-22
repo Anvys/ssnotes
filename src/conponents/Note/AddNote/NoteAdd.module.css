@@ -1,58 +1,54 @@
-.Note{
-    background-color: #79b5cb;
-    width: 200px;
-    height: 200px;
-    padding: 5px;
-    border: 3px solid #cca9a9;
+.block{
+    /*background-color: #79b5cb;*/
+    min-width: 100px;
+    min-height: 100px;
+    /*padding: 5px;*/
+    /*border: 3px solid #cca9a9;*/
     display: flex;
     flex-direction: column;
     justify-content: start;
     /*flex-grow: 0;*/
 }
-.header{
-    font-style: italic;
-    font-size: 20px;
-}
 
-.addNewContent{
+
+.addButton{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    /*padding: 3px 25px;*/
-
-
 }
-.addNewDiv{
-    /*flex-grow: 1;*/
-    display: flex;
-    width: 70%;
-    height: 70%;
-    border-radius: 50%;
-    border: 10px solid black;
+.image{
+    box-sizing: border-box;
     position: relative;
-    /*transition-duration: 0.3s;*/
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    transform: scale(4);
+    border-radius: 22px;
+    color: #ffb907;
+    transition-duration: 0.05s;
+    cursor: pointer;
 }
-.addNewDiv::before{
+.image::after,
+.image::before {
     content: "";
+    display: block;
+    box-sizing: border-box;
     position: absolute;
-    top: 25%;
-    left: 25%;
-    width: 50%;
-    height: 50%;
-    border-radius: 50%;
-    border: 10px solid black;
-    background-color: #b7be46;
-    transition-duration: 0.1s;
-    z-index: 1;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 5px;
+    top: 8px;
+    left: 4px
 }
-.addNewDiv:hover::before{
-    background-color: #ecd857;
+.image::after {
+    width: 2px;
+    height: 10px;
+    top: 4px;
+    left: 8px
 }
-.addNewDiv:active::before{
-    background-color: #2bff07;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
+.image:active{
+    transform: scale(3.5);
 }
