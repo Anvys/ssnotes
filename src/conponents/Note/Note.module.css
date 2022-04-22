@@ -30,7 +30,7 @@
 .header{
     background-color: #79b5cb;
     font-style: italic;
-    font-size: 20px;
+    /*font-size: 20px;*/
     pointer-events: none;
     padding-bottom: 10px;
     margin-bottom: 10px;
@@ -57,7 +57,7 @@
     background-color: #79b5cb;
     width: 100%;
     min-height: 100px;
-    font-size: 22px;
+    /*font-size: 22px;*/
     word-wrap: break-word;
     pointer-events: none;
     flex-grow: 1;

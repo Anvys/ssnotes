@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from "react-redux";
 import NoteList from "./NoteList";
 import {
-    addNote2AC,
+    addNote2AC, deleteImgAC,
     deleteNoteAC,
     editNoteAC,
-    saveEditedNoteAC, setImgAC,
-    showAddNoteModalAC, updateDescFontsAC,
+    saveEditedNoteAC, selectEditTargetAC, setImgAC,
+    showAddNoteModalAC, updateDescFontsAC, updateFontsAC,
     updateNoteDescAC, updateNoteTitleAC, updateTitleFontsAC
 } from "../../redux/reducers/notesReducer";
 
@@ -16,11 +16,13 @@ const mapDispatchToProps = dispatch => ({
     changeTitle: (title,id) => dispatch(updateNoteTitleAC(title,id)),
     deleteNote: id => dispatch(deleteNoteAC(id)),
     setImg: (img, id) => dispatch(setImgAC(img, id)),
+    deleteImg: (id) => dispatch(deleteImgAC(id)),
     showAddNoteModal: () => dispatch(showAddNoteModalAC()),
     editNote: (id) => dispatch(editNoteAC(id)),
     saveEditedNote: (id) => dispatch(saveEditedNoteAC(id)),
-    updateDescFont: (fonts, id) => dispatch(updateDescFontsAC(fonts, id)),
-    updateTitleFont: (fonts, id) => dispatch(updateTitleFontsAC(fonts, id)),
+    selectEditTarget: (target, id) => dispatch(selectEditTargetAC(target,id)),
+    updateFont: (fonts, id, target) => dispatch(updateFontsAC(fonts, id, target)),
+    // updateTitleFont: (fonts, id) => dispatch(updateTitleFontsAC(fonts, id)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(NoteList);

@@ -12,8 +12,11 @@ const EMPTY_DESC = 'EMPTY_DESC'
 const EDIT_NOTE = 'EDIT_NOTE'
 const SAVE_EDITED_NOTE = 'SAVE_EDITED_NOTE'
 const SET_IMG = 'SET_IMG'
+const DELETE_IMG = 'DELETE_IMG'
+const UPDATE_FONTS = 'UPDATE_FONTS'
 const UPDATE_DESC_FONTS = 'UPDATE_DESC_FONTS'
 const UPDATE_TITLE_FONTS = 'UPDATE_TITLE_FONTS'
+const SELECT_EDIT_TARGET = 'SELECT_EDIT_TARGET'
 
 
 export const addNoteAC = () => {
@@ -52,30 +55,45 @@ export const showAddNoteModalAC = () => {
 export const setImgAC = (img, id) => {
     return {type: SET_IMG, img, id};
 }
-export const updateDescFontsAC = (fonts, id) => {
-    return {type: UPDATE_DESC_FONTS, fonts, id};
+export const deleteImgAC = (id) => {
+    return {type: DELETE_IMG, id};
 }
-export const updateTitleFontsAC = (fonts, id) => {
-    return {type: UPDATE_TITLE_FONTS, fonts, id};
+// export const updateDescFontsAC = (fonts, id) => {
+//     return {type: UPDATE_DESC_FONTS, fonts, id};
+// }
+export const updateFontsAC = (fonts, id, target) => {
+    switch (target){
+        case 'header': return {type: UPDATE_TITLE_FONTS, fonts, id};
+        case 'description': return {type: UPDATE_DESC_FONTS, fonts, id};
+    }
+}
+// export const updateTitleFontsAC = (fonts, id) => {
+//     return {type: UPDATE_TITLE_FONTS, fonts, id};
+// }
+export const selectEditTargetAC = (target, id) => {
+    return {type: SELECT_EDIT_TARGET, target, id};
 }
 
 
 const createNoteObj = (id, title, description, dateStart = new Date(), isDone = false, edit = false) => (
     {
-        id, title, description, dateStart: dateStart.toLocaleString(), isDone, edit, img: null, titleFont: {
+        id, title, description, dateStart: dateStart.toLocaleString(), isDone, edit, img: null, editTarget: 'header',
+        titleFont: {
             bold: false,
             italic: true,
             underline: true,
             lineThrough: false,
             fontSize: 20,
-            fontFamily: 'Arial'
+            fontFamily: 'Arial',
+            fontColor: 'black'
         }, descFont: {
             bold: false,
             italic: false,
             underline: false,
             lineThrough: false,
             fontSize: 18,
-            fontFamily: 'Arial'
+            fontFamily: 'Arial',
+            fontColor: 'black'
         },
     }
 );
@@ -95,8 +113,14 @@ let initStorage = () => {
     localStorage.setItem('notes', JSON.stringify(defNotesObj));
     return {...defNotesObj}
 }
-let saveNotesToLS = (state) => {
-    localStorage.setItem('notes', JSON.stringify(state));
+let imgToState = (img) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', ()=>{
+        console.log( reader.result);
+    })
+    reader.readAsDataURL(img)
+    debugger
+    // localStorage.setItem('notes', JSON.stringify(state));
 }
 let returnNewState = (newState) => {
     localStorage.setItem('notes', JSON.stringify(newState));
@@ -172,6 +196,14 @@ const notesReducer = (state = defaultState, action) => {
                 ))
             });
         }
+        case SELECT_EDIT_TARGET: {
+            return returnNewState({
+                ...state,
+                notes: state.notes.map((note, id) => (action.id === note.id ?
+                        {...note, editTarget: action.target} : note
+                ))
+            });
+        }
         case UPDATE_DESC_FONTS: {
             return returnNewState({
                 ...state,
@@ -189,11 +221,19 @@ const notesReducer = (state = defaultState, action) => {
             });
         }
         case SET_IMG: {
-
+            // imgToState(action.img);
             return returnNewState({
                 ...state,
                 notes: state.notes.map((note, id) => (action.id === note.id ?
                         {...note, img: action.img} : note
+                ))
+            });
+        }
+        case DELETE_IMG: {
+            return returnNewState({
+                ...state,
+                notes: state.notes.map((note, id) => (action.id === note.id ?
+                        {...note, img: null} : note
                 ))
             });
         }
