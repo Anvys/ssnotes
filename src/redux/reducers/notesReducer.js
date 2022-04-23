@@ -17,6 +17,8 @@ const UPDATE_FONTS = 'UPDATE_FONTS'
 const UPDATE_DESC_FONTS = 'UPDATE_DESC_FONTS'
 const UPDATE_TITLE_FONTS = 'UPDATE_TITLE_FONTS'
 const SELECT_EDIT_TARGET = 'SELECT_EDIT_TARGET'
+const LOAD_FROM_FILE = 'LOAD_FROM_FILE'
+const SAVE_FROM_FILE = 'SAVE_FROM_FILE'
 
 
 export const addNoteAC = () => {
@@ -58,20 +60,20 @@ export const setImgAC = (img, id) => {
 export const deleteImgAC = (id) => {
     return {type: DELETE_IMG, id};
 }
-// export const updateDescFontsAC = (fonts, id) => {
-//     return {type: UPDATE_DESC_FONTS, fonts, id};
-// }
 export const updateFontsAC = (fonts, id, target) => {
     switch (target){
         case 'header': return {type: UPDATE_TITLE_FONTS, fonts, id};
         case 'description': return {type: UPDATE_DESC_FONTS, fonts, id};
     }
 }
-// export const updateTitleFontsAC = (fonts, id) => {
-//     return {type: UPDATE_TITLE_FONTS, fonts, id};
-// }
 export const selectEditTargetAC = (target, id) => {
     return {type: SELECT_EDIT_TARGET, target, id};
+}
+export const loadDataFromFileAC = (data) => {
+    return {type: LOAD_FROM_FILE, data};
+}
+export const saveDataToFileAC = () => {
+    return {type: SAVE_FROM_FILE};
 }
 
 
@@ -132,6 +134,20 @@ let defaultState = (localStorage.getItem('notes') === null ||
     initStorage() : JSON.parse(localStorage.getItem('notes'))
 // let defaultState = initStorage();
 
+const saveDataToFile = (data) =>{
+    const fileData = JSON.stringify(data);
+    const blob = new Blob([fileData], {type: "text/plain"});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = 'savedNotes.json';
+    link.href = url;
+    link.click();
+}
+// const loadDataFromFile = (data) =>{
+//     const reader = new FileReader();
+//     reader.readAsText(data, "UTF-8");
+//     reader.onload = e => e.target.result;
+// }
 const notesReducer = (state = defaultState, action) => {
     // saveNotesToLS(state);
     switch (action.type) {
@@ -263,6 +279,16 @@ const notesReducer = (state = defaultState, action) => {
                 notes: state.notes.filter((note, id) => action.id !== note.id),
                 editInProgress: state.notes.find(note => note.id === action.id).edit === true ? false : state.editInProgress
             });
+        }
+        case LOAD_FROM_FILE: {
+            return returnNewState({
+                ...state,
+                ...action.data
+            });
+        }
+        case SAVE_FROM_FILE: {
+            saveDataToFile(state);
+            return state;
         }
         default: {
             return state;

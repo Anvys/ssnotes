@@ -1,0 +1,25 @@
+.content{
+    /*display: flex;*/
+    /*flex-grow: 1;*/
+}
+.description{
+    resize: none;
+    background-color: rgba(255, 255, 255, 0.54);
+    width: 100%;
+    /*min-height: 100px;*/
+    /*font-size: 22px;*/
+    max-height: 400px;
+    word-wrap: break-word;
+    pointer-events: none;
+    flex-grow: 1;
+}
+
+.descriptionEditing{
+    pointer-events: all;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*flex-grow: 1;*/
+    min-height: 100px;
+    background-color: rgba(255, 255, 255, 0.85);
+
+}

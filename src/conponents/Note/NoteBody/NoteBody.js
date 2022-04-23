@@ -1,18 +1,19 @@
-import styles from "../Note.module.css";
+import styles from "./NoteBody.module.css";
 import fontStyles from "../../EditNoteBar/EditNoteBar.module.css";
 import PropTypes from "prop-types";
 import React from "react";
 
 function NoteBody(props) {
-    return <div style={{fontSize: props.note.descFont.fontSize}}
+    let inStyle = {fontSize: props.note.descFont.fontSize, fontFamily: `"${props.note.descFont.fontFamily}", serif`};
+    return <div style={inStyle}
                 className={`${props.descStyles.join(" ")} ${styles.content} ${fontStyles[props.note.descFont.color]}`}>
         {props.note.edit ?
             <textarea type="text"
                       className={`${styles.description} ${styles.descriptionEditing} ${props.descStyles.join(" ")} ${fontStyles[props.note.descFont.color]}`}
-                      style={{fontSize: props.note.descFont.fontSize}}
+                      style={inStyle}
                       value={props.note.description}
                       onChange={props.onChange}/> :
-            <span className={styles.description}>{props.note.description}</span>
+            <div className={styles.description}>{props.note.description}</div>
         }
     </div>;
 }

@@ -2,14 +2,23 @@ import React from 'react';
 import './App.css';
 import NoteListContainer from "./conponents/NoteList/NoteListContainer";
 import SideBarContainer from "./conponents/SideBar/SideBarContainer";
+import NavBar from "./conponents/NavBar/NavBar";
 
 
 function App(props) {
     return (
         <div className="wrapper">
-            <SideBarContainer/>
-            <div className="App">
-                <NoteListContainer/>
+            <div className='column'>
+                <NavBar/>
+                <div className={'row'}>
+                    <SideBarContainer/>
+                    <div className="App">
+                        <NoteListContainer/>
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
     );

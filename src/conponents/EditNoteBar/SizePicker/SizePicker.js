@@ -8,27 +8,27 @@ const SizePicker = (props) => {
     const onPickSizeSmall = () => props.updateFont({
         ...props.curFont,
         fontSize: 14
-    }, props.note.id, props.note.editTarget);
+    }, props.note.id, props.editTarget);
     const onPickSizeNormal = () => props.updateFont({
         ...props.curFont,
         fontSize: 20
-    }, props.note.id, props.note.editTarget);
+    }, props.note.id, props.editTarget);
     const onPickSizeBig = () => props.updateFont({
         ...props.curFont,
         fontSize: 24
-    }, props.note.id, props.note.editTarget);
+    }, props.note.id, props.editTarget);
     const onPickSizeBig28 = () => props.updateFont({
         ...props.curFont,
         fontSize: 28
-    }, props.note.id, props.note.editTarget);
+    }, props.note.id, props.editTarget);
     const onPickSizeBig32 = () => props.updateFont({
         ...props.curFont,
         fontSize: 32
-    }, props.note.id, props.note.editTarget);
+    }, props.note.id, props.editTarget);
     const onPickSizeBig36 = () => props.updateFont({
         ...props.curFont,
         fontSize: 36
-    }, props.note.id, props.note.editTarget);
+    }, props.note.id, props.editTarget);
     return (
         <div className={styles.block}>
             <div className={styles.curColor}>{props.curFont.fontSize}</div>

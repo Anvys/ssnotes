@@ -1,0 +1,16 @@
+.header{
+    background-color: rgba(255, 255, 255, 0.54);
+    font-style: italic;
+    pointer-events: none;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+.headerEditing{
+    font-size: 20px;
+    pointer-events: all;
+    background-color: rgba(255, 255, 255, 0.85);
+    resize: none;
+    width: 100%;
+}

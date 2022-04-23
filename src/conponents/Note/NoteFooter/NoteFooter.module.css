@@ -1,0 +1,52 @@
+.footer{
+    border-top: 1px solid black;
+    margin-top: 15px;
+    padding-top: 10px;
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+
+}
+.dateStart{
+    width: 40%;
+    word-wrap: break-word;
+    font-size: 12px;
+}
+
+.delButton, .editButton{
+    /*padding: 5px;*/
+    /*border: 1px solid black;*/
+    cursor: pointer;
+}
+
+.delButton{
+    background-color: rgba(255, 255, 255, 0.55);
+}
+.delButton:hover{
+    background-color: #e56565;
+}
+.delButton:active{
+    background-color: #dc1111;
+}
+
+.editButton{
+    background-color: rgba(255, 255, 255, 0.55);
+    margin-right: 2px;
+}
+.editButton:hover{
+    background-color: #a4a49f;
+}
+.editButton:active{
+    background-color: #e1cd42;
+}
+
+.editButtonSave{
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+.editButtonSave:hover{
+    background-color: #a1de75;
+}
+.editButtonSave:active{
+    background-color: #57e835;
+}

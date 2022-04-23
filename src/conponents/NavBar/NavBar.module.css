@@ -1,0 +1,13 @@
+.navBar{
+    display: flex;
+    background-color: black;
+    align-items: center;
+}
+.image{
+    width: 50px;
+}
+.github{
+    padding: 5px 10px;
+    background-color: #b6b6b6;
+    border-radius: 30px;
+}

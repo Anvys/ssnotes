@@ -1,0 +1,27 @@
+.radioDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    /*padding-top: 3px;*/
+    /*justify-content: right;*/
+    border: 1px solid black;
+}
+.radio{
+    border: 1px solid black;
+     /*margin: 0px 0px 0px 2px;*/
+     /*height: 15px;*/
+     display: flex;
+     justify-content: right;
+
+ }
+.radioLabel{
+    font-size: 14px;
+    /*margin: 0px 5px 0px 0px;*/
+}
+
+.radio *:last-child{
+    margin: 0px 0px 0px 4px;
+}
+.radioradio{
+    height: 80%;
+}

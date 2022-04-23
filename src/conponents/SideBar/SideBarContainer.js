@@ -1,7 +1,13 @@
 import React from 'react';
 import {connect} from "react-redux";
 import SideBar from "./SideBar";
-import {addNote2AC, deleteNoteAC, showAddNoteModalAC, updateNoteDescAC} from "../../redux/reducers/notesReducer";
+import {
+    addNote2AC,
+    deleteNoteAC, loadDataFromFileAC,
+    saveDataToFileAC,
+    showAddNoteModalAC,
+    updateNoteDescAC
+} from "../../redux/reducers/notesReducer";
 
 
 const mapStateToProps = state => ({
@@ -12,6 +18,8 @@ const mapDispatchToProps = dispatch => ({
     deleteDesk: id => dispatch(deleteNoteAC(id)),
     showAddNoteModal: () => dispatch(showAddNoteModalAC()),
     addNote: () => dispatch(addNote2AC()),
+    saveData: () => dispatch(saveDataToFileAC()),
+    loadData: (data) => dispatch(loadDataFromFileAC(data)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(SideBar);

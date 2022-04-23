@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './NoteList.module.css';
 import Note from "../Note/Note";
-import NoteAdd from "../Note/AddNote/NoteAdd";
+
 
 const NoteList = (props) => {
     return (
@@ -10,18 +10,19 @@ const NoteList = (props) => {
             <div className={styles.noteList}>
                 {
                     props.notesArr.map((note, id) => <Note
+                            {...props}
                             note={note}
                             key={id}
-                            editInProgress={props.editInProgress}
-                            changeDesk={props.changeDesk}
-                            changeTitle={props.changeTitle}
-                            deleteNote={props.deleteNote}
-                            editNote = {props.editNote}
-                            saveEditedNote = {props.saveEditedNote}
-                            setImg = {props.setImg}
-                            deleteImg = {props.deleteImg}
-                            selectEditTarget = {props.selectEditTarget}
-                            updateFont={props.updateFont}
+                            // editInProgress={props.editInProgress}
+                            // changeDesk={props.changeDesk}
+                            // changeTitle={props.changeTitle}
+                            // deleteNote={props.deleteNote}
+                            // editNote = {props.editNote}
+                            // saveEditedNote = {props.saveEditedNote}
+                            // setImg = {props.setImg}
+                            // deleteImg = {props.deleteImg}
+                            // selectEditTarget = {props.selectEditTarget}
+                            // updateFont={props.updateFont}
                             // updateTitleFont={props.updateTitleFont}
                             // addNote = {props.addNote}
                         />
@@ -29,13 +30,24 @@ const NoteList = (props) => {
                 }
 
             </div>
-    </div>
+        </div>
 
     );
 }
 
 NoteList.propTypes = {
-    notesArr: PropTypes.arrayOf(PropTypes.object)
+    notesArr: PropTypes.arrayOf(PropTypes.object),
+    editInProgress: PropTypes.bool,
+    changeDesk: PropTypes.func,
+    changeTitle: PropTypes.func,
+    deleteNote: PropTypes.func,
+    setImg: PropTypes.func,
+    deleteImg: PropTypes.func,
+    showAddNoteModal: PropTypes.func,
+    editNote: PropTypes.func,
+    saveEditedNote: PropTypes.func,
+    selectEditTarget: PropTypes.func,
+    updateFont: PropTypes.func,
 };
 
 export default NoteList;

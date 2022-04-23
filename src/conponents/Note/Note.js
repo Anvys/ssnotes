@@ -13,24 +13,37 @@ const Note = (props) => {
     const onDeleteNoteHandler = () => props.deleteNote(props.note.id);
     const onSaveClickHandler = () => props.saveEditedNote(props.note.id);
     const onEditClickHandler = () => props.editNote(props.note.id);
-
-    let descStyles = [];
-    for (const [key, value] of Object.entries(props.note.descFont)) {
-        if (value === true) descStyles.push(fontStyles[key]);
-    }
-    let titleStyles = [];
-    for (const [key, value] of Object.entries(props.note.titleFont)) {
-        if (value === true) titleStyles.push(fontStyles[key]);
+    const parseFontStyles = (fontsData, fontStyles) => {
+        let Styles = [];
+        for (const [key, value] of Object.entries(fontsData)) {
+            if (value === true) Styles.push(fontStyles[key]);
+        }
+        return Styles;
     }
     return (
         <div style={{background: props.note.img !== null ? `url(${props.note.img}) center / cover no-repeat` : null}}
              className={props.note.edit ? `${styles.Note} ${styles.NoteEditing}` : styles.Note}>
-            <NoteHeader note={props.note} titleStyles={titleStyles} onChange={onTitleChangeHandler}/>
-            <NoteBody note={props.note} descStyles={descStyles} onChange={onDescChangeHandler}/>
+            {
+                (props.note.edit || props.note.title !== "") &&
+                <NoteHeader note={props.note} titleStyles={parseFontStyles(props.note.titleFont, fontStyles)}
+                            onChange={onTitleChangeHandler}/>
+            }
+
             {
                 props.note.edit && <EditNoteBar setImg={props.setImg}
                                                 deleteImg={props.deleteImg}
                                                 note={props.note}
+                                                editTarget={'header'}
+                                                selectEditTarget={props.selectEditTarget}
+                                                updateFont={props.updateFont}/>
+            }
+            <NoteBody note={props.note} descStyles={parseFontStyles(props.note.descFont, fontStyles)}
+                      onChange={onDescChangeHandler}/>
+            {
+                props.note.edit && <EditNoteBar setImg={props.setImg}
+                                                deleteImg={props.deleteImg}
+                                                note={props.note}
+                                                editTarget={'description'}
                                                 selectEditTarget={props.selectEditTarget}
                                                 updateFont={props.updateFont}/>
             }
@@ -46,7 +59,19 @@ const Note = (props) => {
 
 Note.propTypes = {
     description: PropTypes.string,
-    note: PropTypes.object
+    note: PropTypes.object,
+    notesArr: PropTypes.arrayOf(PropTypes.object),
+    editInProgress: PropTypes.bool,
+    changeDesk: PropTypes.func,
+    changeTitle: PropTypes.func,
+    deleteNote: PropTypes.func,
+    setImg: PropTypes.func,
+    deleteImg: PropTypes.func,
+    showAddNoteModal: PropTypes.func,
+    editNote: PropTypes.func,
+    saveEditedNote: PropTypes.func,
+    selectEditTarget: PropTypes.func,
+    updateFont: PropTypes.func,
 };
 
 export default Note;

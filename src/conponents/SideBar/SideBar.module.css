@@ -1,5 +1,6 @@
 .sideBar{
     display: flex;
+    max-width: 30%;
 }
 .block{
     background-color: #666566;
@@ -7,4 +8,24 @@
     gap: 10px;
     padding: 15px;
     flex-direction: column;
+}
+.fileBlock{
+    display: flex;
+    justify-content: center;
+}
+.download{
+    width: 30%;
+    cursor: pointer;
+}
+.upload{
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+}
+.labelUpload{
+    width: 30%;
+    /*height: 40px;*/
+    pointer-events: all;
+    cursor: pointer;
+    /*background: url("");*/
 }

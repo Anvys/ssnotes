@@ -1,17 +1,26 @@
-import styles from "../Note.module.css";
+import styles from "./NoteFooter.module.css";
 import PropTypes from "prop-types";
 import React from "react";
+import editIcon from "../../../assets/img/icons/edit.svg";
+import deleteIcon from "../../../assets/img/icons/trash.svg";
+import saveIcon from "../../../assets/img/icons/check.svg";
 
 
 function NoteFooter(props) {
     return <div className={styles.footer}>
         <div className={styles.dateStart}>{props.note.dateStart}</div>
-        {
-            props.note.edit ? <button className={styles.editButton} onClick={props.onSaveClickHandler}>Save</button> :
-                props.editInProgress ? null :
-                    <button className={styles.editButton} onClick={props.onEditClickHandler}> Edit </button>
-        }
-        <button className={styles.delButton} onClick={props.onDeleteNoteHandler}>Delete</button>
+        <div>
+            {
+                props.note.edit ?
+                    // Показать кнопку "сохратить только когда редактируется
+                    <img src={saveIcon} className={styles.editButtonSave} onClick={props.onSaveClickHandler}/> :
+                    // Не показывать кнопки у других если чтото редактируется
+                    props.editInProgress ? null :
+                        // Показывать кнопки [ ] если ничего не редактируется
+                        [<img src={editIcon} className={styles.editButton} onClick={props.onEditClickHandler} key={'1'}/>,
+                            <img src={deleteIcon} className={styles.delButton} onClick={props.onDeleteNoteHandler} key={'2'}/>]
+            }
+        </div>
     </div>;
 }
 
