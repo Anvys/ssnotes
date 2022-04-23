@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/ssnotes/static/css/main.c4967615.css",
-    "main.js": "/ssnotes/static/js/main.4bd9a38d.js",
+    "main.css": "/ssnotes/static/css/main.70a9a5d7.css",
+    "main.js": "/ssnotes/static/js/main.60cfc8d9.js",
     "static/media/fontf.svg": "/ssnotes/static/media/fontf.dee78e1d30d78635b32f81ff04998c63.svg",
     "static/media/edit.svg": "/ssnotes/static/media/edit.a0ebbe9202c87b50ca3f4b4d5d3a30db.svg",
     "static/media/formatColor.svg": "/ssnotes/static/media/formatColor.ddda93f82e51f3fdaa657bd6f88f1550.svg",
@@ -10,11 +10,13 @@
     "static/media/fileAdd.svg": "/ssnotes/static/media/fileAdd.0c7de2df3709cfc9aa39.svg",
     "static/media/fileRemove.svg": "/ssnotes/static/media/fileRemove.936ef1ac50e0b50d84c0f8e0357359b1.svg",
     "index.html": "/ssnotes/index.html",
-    "main.c4967615.css.map": "/ssnotes/static/css/main.c4967615.css.map",
-    "main.4bd9a38d.js.map": "/ssnotes/static/js/main.4bd9a38d.js.map"
+    "static/media/upload.svg": "/ssnotes/static/media/upload.0b16dd0b6238c6ed9d895476b4bd6a76.svg",
+    "static/media/download.svg": "/ssnotes/static/media/download.a88ef38f711e4eaeceda492b1db35f6f.svg",
+    "main.70a9a5d7.css.map": "/ssnotes/static/css/main.70a9a5d7.css.map",
+    "main.60cfc8d9.js.map": "/ssnotes/static/js/main.60cfc8d9.js.map"
   },
   "entrypoints": [
-    "static/css/main.c4967615.css",
-    "static/js/main.4bd9a38d.js"
+    "static/css/main.70a9a5d7.css",
+    "static/js/main.60cfc8d9.js"
   ]
 }
