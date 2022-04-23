@@ -1,14 +1,20 @@
 {
   "files": {
-    "main.css": "/ssnotes/static/css/main.faa0113a.css",
-    "main.js": "/ssnotes/static/js/main.3f44ed29.js",
-    "static/media/color.svg": "/ssnotes/static/media/color.464a0d44fc773ea61a1dce451fb9eb02.svg",
+    "main.css": "/ssnotes/static/css/main.c4967615.css",
+    "main.js": "/ssnotes/static/js/main.4bd9a38d.js",
+    "static/media/fontf.svg": "/ssnotes/static/media/fontf.dee78e1d30d78635b32f81ff04998c63.svg",
+    "static/media/edit.svg": "/ssnotes/static/media/edit.a0ebbe9202c87b50ca3f4b4d5d3a30db.svg",
+    "static/media/formatColor.svg": "/ssnotes/static/media/formatColor.ddda93f82e51f3fdaa657bd6f88f1550.svg",
+    "static/media/trash.svg": "/ssnotes/static/media/trash.284012c6352d8d0e7eb887624804950c.svg",
+    "static/media/check.svg": "/ssnotes/static/media/check.0a59d83f3d2373a964271ce5d7426699.svg",
+    "static/media/fileAdd.svg": "/ssnotes/static/media/fileAdd.0c7de2df3709cfc9aa39.svg",
+    "static/media/fileRemove.svg": "/ssnotes/static/media/fileRemove.936ef1ac50e0b50d84c0f8e0357359b1.svg",
     "index.html": "/ssnotes/index.html",
-    "main.faa0113a.css.map": "/ssnotes/static/css/main.faa0113a.css.map",
-    "main.3f44ed29.js.map": "/ssnotes/static/js/main.3f44ed29.js.map"
+    "main.c4967615.css.map": "/ssnotes/static/css/main.c4967615.css.map",
+    "main.4bd9a38d.js.map": "/ssnotes/static/js/main.4bd9a38d.js.map"
   },
   "entrypoints": [
-    "static/css/main.faa0113a.css",
-    "static/js/main.3f44ed29.js"
+    "static/css/main.c4967615.css",
+    "static/js/main.4bd9a38d.js"
   ]
 }
