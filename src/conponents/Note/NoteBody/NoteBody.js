@@ -8,12 +8,17 @@ function NoteBody(props) {
     return <div style={inStyle}
                 className={`${props.descStyles.join(" ")} ${styles.content} ${fontStyles[props.note.descFont.color]}`}>
         {props.note.edit ?
-            <textarea type="text"
-                      className={`${styles.description} ${styles.descriptionEditing} ${props.descStyles.join(" ")} ${fontStyles[props.note.descFont.color]}`}
-                      style={inStyle}
-                      value={props.note.description}
-                      onChange={props.onChange}/> :
+            <textarea placeholder={'Описание'}
+                className={`${styles.description} ${styles.descriptionEditing} ${props.descStyles.join(" ")} ${fontStyles[props.note.descFont.color]}`}
+                style={inStyle}
+                value={props.note.description}
+                onChange={props.onChange}/> :
             <div className={styles.description}>{props.note.description}</div>
+        }
+        {
+            props.note.imgInText !== null
+                ? <img alt={'Image in text'} src={props.note.imgInText}/>
+                : null
         }
     </div>;
 }

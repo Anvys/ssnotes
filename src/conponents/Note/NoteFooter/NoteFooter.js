@@ -13,12 +13,17 @@ function NoteFooter(props) {
             {
                 props.note.edit ?
                     // Показать кнопку "сохратить только когда редактируется
-                    <img src={saveIcon} className={styles.editButtonSave} onClick={props.onSaveClickHandler}/> :
+                    <img alt={'saveIcon'} src={saveIcon} className={styles.editButtonSave}
+                         onClick={props.onSaveClickHandler}/> :
                     // Не показывать кнопки у других если чтото редактируется
                     props.editInProgress ? null :
                         // Показывать кнопки [ ] если ничего не редактируется
-                        [<img src={editIcon} className={styles.editButton} onClick={props.onEditClickHandler} key={'1'}/>,
-                            <img src={deleteIcon} className={styles.delButton} onClick={props.onDeleteNoteHandler} key={'2'}/>]
+                        [
+                            <img alt={'editIcon'} src={editIcon} className={styles.editButton}
+                              onClick={props.onEditClickHandler} key={'1'}/>,
+                            <img alt={'deleteIcon'} src={deleteIcon} className={styles.delButton}
+                                 onClick={props.onDeleteNoteHandler} key={'2'}/>
+                        ]
             }
         </div>
     </div>;

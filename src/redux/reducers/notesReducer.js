@@ -6,14 +6,13 @@ const UPDATE_NOTE_DESC = 'UPDATE_NOTE_DESC'
 const UPDATE_NOTE_TITLE = 'UPDATE_NOTE_TITLE'
 const UPDATE_NEW_NOTE_DESC = 'UPDATE_NEW_NOTE_DESC'
 const UPDATE_NEW_NOTE_TITLE = 'UPDATE_NEW_NOTE_TITLE'
-
 const DELETE_NOTE = 'DELETE_NOTE'
-const EMPTY_DESC = 'EMPTY_DESC'
 const EDIT_NOTE = 'EDIT_NOTE'
 const SAVE_EDITED_NOTE = 'SAVE_EDITED_NOTE'
 const SET_IMG = 'SET_IMG'
 const DELETE_IMG = 'DELETE_IMG'
-const UPDATE_FONTS = 'UPDATE_FONTS'
+const SET_IMG_IN_TEXT = 'SET_IMG_IN_TEXT'
+const DELETE_IMG_IN_TEXT = 'DELETE_IMG_IN_TEXT'
 const UPDATE_DESC_FONTS = 'UPDATE_DESC_FONTS'
 const UPDATE_TITLE_FONTS = 'UPDATE_TITLE_FONTS'
 const SELECT_EDIT_TARGET = 'SELECT_EDIT_TARGET'
@@ -60,10 +59,18 @@ export const setImgAC = (img, id) => {
 export const deleteImgAC = (id) => {
     return {type: DELETE_IMG, id};
 }
+export const setImgInTextAC = (img, id) => {
+    return {type: SET_IMG_IN_TEXT, img, id};
+}
+export const deleteImgInTextAC = (id) => {
+    return {type: DELETE_IMG_IN_TEXT, id};
+}
 export const updateFontsAC = (fonts, id, target) => {
-    switch (target){
-        case 'header': return {type: UPDATE_TITLE_FONTS, fonts, id};
-        case 'description': return {type: UPDATE_DESC_FONTS, fonts, id};
+    switch (target) {
+        case 'header':
+            return {type: UPDATE_TITLE_FONTS, fonts, id};
+        case 'description':
+            return {type: UPDATE_DESC_FONTS, fonts, id};
     }
 }
 export const selectEditTargetAC = (target, id) => {
@@ -77,35 +84,38 @@ export const saveDataToFileAC = () => {
 }
 
 
-const createNoteObj = (id, title, description, dateStart = new Date(), isDone = false, edit = false) => (
-    {
-        id, title, description, dateStart: dateStart.toLocaleString(), isDone, edit, img: null, editTarget: 'header',
-        titleFont: {
-            bold: false,
-            italic: true,
-            underline: true,
-            lineThrough: false,
-            fontSize: 20,
-            fontFamily: 'Arial',
-            fontColor: 'black'
-        }, descFont: {
-            bold: false,
-            italic: false,
-            underline: false,
-            lineThrough: false,
-            fontSize: 18,
-            fontFamily: 'Arial',
-            fontColor: 'black'
-        },
-    }
-);
+const createNoteObj = (id, title, description, dateStart = new Date(),
+                       isDone = false, edit = false) => ({
+    id,
+    title,
+    description,
+    dateStart: dateStart.toLocaleString(),
+    isDone,
+    edit,
+    img: null,
+    imgInText: null,
+    editTarget: 'header',
+    titleFont: {
+        bold: false,
+        italic: true,
+        underline: true,
+        lineThrough: false,
+        fontSize: 20,
+        fontFamily: 'Arial',
+        fontColor: 'black'
+    },
+    descFont: {
+        bold: false,
+        italic: false,
+        underline: false,
+        lineThrough: false,
+        fontSize: 18,
+        fontFamily: 'Arial',
+        fontColor: 'black'
+    },
+});
 const defNotesObj = {
-    notes: [
-        createNoteObj(1, 'купить', 'купить хлеб'),
-        createNoteObj(2, 'тоже купить', 'купить молоко'),
-        createNoteObj(3, 'работа', 'дописать это'),
-        createNoteObj(4, 'так', 'вот'),
-    ],
+    notes: [createNoteObj(1, 'купить', 'купить хлеб'), createNoteObj(2, 'тоже купить', 'купить молоко'), createNoteObj(3, 'работа', 'дописать это'), createNoteObj(4, 'так', 'вот'),],
     editInProgress: false,
     newNoteDesc: '',
     newNoteTitle: '',
@@ -115,26 +125,18 @@ let initStorage = () => {
     localStorage.setItem('notes', JSON.stringify(defNotesObj));
     return {...defNotesObj}
 }
-let imgToState = (img) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', ()=>{
-        console.log( reader.result);
-    })
-    reader.readAsDataURL(img)
-    debugger
-    // localStorage.setItem('notes', JSON.stringify(state));
-}
 let returnNewState = (newState) => {
     localStorage.setItem('notes', JSON.stringify(newState));
     return newState;
 }
 
-let defaultState = (localStorage.getItem('notes') === null ||
-    localStorage.getItem('notes') === 'undefined') ?
-    initStorage() : JSON.parse(localStorage.getItem('notes'))
-// let defaultState = initStorage();
+let defaultState = (
+    localStorage.getItem('notes') === null || localStorage.getItem('notes') === 'undefined')
+    ? initStorage()
+    : JSON.parse(localStorage.getItem('notes'))
 
-const saveDataToFile = (data) =>{
+
+const saveDataToFile = (data) => {
     const fileData = JSON.stringify(data);
     const blob = new Blob([fileData], {type: "text/plain"});
     const url = URL.createObjectURL(blob);
@@ -143,11 +145,6 @@ const saveDataToFile = (data) =>{
     link.href = url;
     link.click();
 }
-// const loadDataFromFile = (data) =>{
-//     const reader = new FileReader();
-//     reader.readAsText(data, "UTF-8");
-//     reader.onload = e => e.target.result;
-// }
 const notesReducer = (state = defaultState, action) => {
     // saveNotesToLS(state);
     switch (action.type) {
@@ -156,9 +153,10 @@ const notesReducer = (state = defaultState, action) => {
             // return state.editInProgress ? (state, alert('Сохраните редактируемую заметку') ) : {
             return returnNewState({
                 ...state,
-                notes: [
-                    ...state.notes.map((note, id) => ({...note, id: id})),
-                    createNoteObj(state.notes.length + 1, state.newNoteTitle, state.newNoteDesc)
+                notes: [...state.notes.map((note, id) => ({
+                    ...note,
+                    id: id
+                })), createNoteObj(state.notes.length + 1, state.newNoteTitle, state.newNoteDesc)
                     // {id: state.notes.length + 1,title: state.newNoteTitle, description: state.newNoteDesc, isDone: false},
                 ],
                 newNoteDesc: "",
@@ -169,9 +167,10 @@ const notesReducer = (state = defaultState, action) => {
         case ADD_NOTE2: {
             return returnNewState({
                 ...state,
-                notes: [
-                    ...state.notes.map((note, id) => ({...note, id: id})),
-                    {...createNoteObj(state.notes.length + 1, state.newNoteTitle, state.newNoteDesc), edit: true}
+                notes: [...state.notes.map((note, id) => ({
+                    ...note,
+                    id: id
+                })), {...createNoteObj(state.notes.length + 1, state.newNoteTitle, state.newNoteDesc), edit: true}
                     // {id: state.notes.length + 1,title: state.newNoteTitle, description: state.newNoteDesc, isDone: false},
                 ],
                 newNoteDesc: "",
@@ -183,18 +182,14 @@ const notesReducer = (state = defaultState, action) => {
         case EDIT_NOTE: {
             return returnNewState({
                 ...state,
-                notes: state.notes.map((note, id) => (action.id === note.id ?
-                        {...note, edit: true} : note
-                )),
+                notes: state.notes.map(note => (action.id === note.id ? {...note, edit: true} : note)),
                 editInProgress: true
             })
         }
         case SAVE_EDITED_NOTE: {
             return returnNewState({
                 ...state,
-                notes: state.notes.map((note, id) => (action.id === note.id ?
-                        {...note, edit: false} : note
-                )),
+                notes: state.notes.map(note => (action.id === note.id ? {...note, edit: false} : note)),
                 editInProgress: false
             })
         }
@@ -207,83 +202,77 @@ const notesReducer = (state = defaultState, action) => {
         case UPDATE_NOTE_DESC: {
             return returnNewState({
                 ...state,
-                notes: state.notes.map((note, id) => (action.id === note.id ?
-                        {...note, description: action.description} : note
-                ))
+                notes: state.notes.map(note => (action.id === note.id ? {
+                    ...note,
+                    description: action.description
+                } : note))
             });
         }
         case SELECT_EDIT_TARGET: {
             return returnNewState({
                 ...state,
-                notes: state.notes.map((note, id) => (action.id === note.id ?
-                        {...note, editTarget: action.target} : note
-                ))
+                notes: state.notes.map(note => (action.id === note.id ? {...note, editTarget: action.target} : note))
             });
         }
         case UPDATE_DESC_FONTS: {
             return returnNewState({
                 ...state,
-                notes: state.notes.map((note, id) => (action.id === note.id ?
-                        {...note, descFont: {...action.fonts}} : note
-                ))
+                notes: state.notes.map(note => (action.id === note.id ? {...note, descFont: {...action.fonts}} : note))
             });
         }
         case UPDATE_TITLE_FONTS: {
             return returnNewState({
                 ...state,
-                notes: state.notes.map((note, id) => (action.id === note.id ?
-                        {...note, titleFont: {...action.fonts}} : note
-                ))
+                notes: state.notes.map(note => (action.id === note.id ? {...note, titleFont: {...action.fonts}} : note))
             });
         }
         case SET_IMG: {
             // imgToState(action.img);
             return returnNewState({
-                ...state,
-                notes: state.notes.map((note, id) => (action.id === note.id ?
-                        {...note, img: action.img} : note
-                ))
+                ...state, notes: state.notes.map(note => (action.id === note.id ? {...note, img: action.img} : note))
             });
         }
         case DELETE_IMG: {
             return returnNewState({
-                ...state,
-                notes: state.notes.map((note, id) => (action.id === note.id ?
-                        {...note, img: null} : note
-                ))
+                ...state, notes: state.notes.map(note => (action.id === note.id ? {...note, img: null} : note))
+            });
+        }
+        case SET_IMG_IN_TEXT: {
+            return returnNewState({
+                ...state, notes: state.notes.map(note => (action.id === note.id ? {...note, imgInText: action.img} : note))
+            });
+        }
+        case DELETE_IMG_IN_TEXT: {
+            return returnNewState({
+                ...state, notes: state.notes.map(note => (action.id === note.id ? {...note, imgInText: null} : note))
             });
         }
         case UPDATE_NOTE_TITLE: {
             return returnNewState({
                 ...state,
-                notes: state.notes.map((note, id) => (action.id === note.id ?
-                        {...note, title: action.title} : note
-                ))
+                notes: state.notes.map(note => (action.id === note.id ? {...note, title: action.title} : note))
             });
         }
         case UPDATE_NEW_NOTE_DESC: {
             return returnNewState({
-                ...state,
-                newNoteDesc: action.description
+                ...state, newNoteDesc: action.description
             });
         }
         case UPDATE_NEW_NOTE_TITLE: {
             return returnNewState({
-                ...state,
-                newNoteTitle: action.title
+                ...state, newNoteTitle: action.title
             });
         }
         case DELETE_NOTE: {
             return returnNewState({
                 ...state,
-                notes: state.notes.filter((note, id) => action.id !== note.id),
+                notes: state.notes.filter(note => action.id !== note.id),
                 editInProgress: state.notes.find(note => note.id === action.id).edit === true ? false : state.editInProgress
             });
         }
         case LOAD_FROM_FILE: {
             return returnNewState({
-                ...state,
-                ...action.data
+                ...state, ...action.data
             });
         }
         case SAVE_FROM_FILE: {
@@ -292,6 +281,7 @@ const notesReducer = (state = defaultState, action) => {
         }
         default: {
             return state;
+            // return {...state, notes:state.notes.map(item=>({...item,imgInText: null}))};
         }
     }
 }

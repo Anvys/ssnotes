@@ -11,3 +11,14 @@
     background-color: #b6b6b6;
     border-radius: 30px;
 }
+@media (max-width: 450px) {
+    .image{
+        width: 20px;
+    }
+    .github{
+        padding: 2px 4px;
+        font-size: 14px;
+        background-color: #b6b6b6;
+        border-radius: 30px;
+    }
+}

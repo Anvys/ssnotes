@@ -20,7 +20,6 @@
 }
 
 .block:hover .curColor{
-    align-self: start;
     font-size: 18px;
     text-align: center;
     width: 20px;
@@ -30,7 +29,7 @@
     left: 1px;
     border: 1px solid black;
     box-shadow: 1px 1px 1px 1px black;
-
+    align-self: start;
 }
 
 .curColor{

@@ -2,12 +2,12 @@ import React from 'react';
 import {connect} from "react-redux";
 import NoteList from "./NoteList";
 import {
-    deleteImgAC,
+    deleteImgAC, deleteImgInTextAC,
     deleteNoteAC,
     editNoteAC,
     saveEditedNoteAC,
     selectEditTargetAC,
-    setImgAC,
+    setImgAC, setImgInTextAC,
     showAddNoteModalAC,
     updateFontsAC,
     updateNoteDescAC,
@@ -21,6 +21,8 @@ const mapDispatchToProps = dispatch => ({
     deleteNote: id => dispatch(deleteNoteAC(id)),
     setImg: (img, id) => dispatch(setImgAC(img, id)),
     deleteImg: (id) => dispatch(deleteImgAC(id)),
+    setImgInText : (img, id) => dispatch(setImgInTextAC(img, id)),
+    deleteImgInText: (id) => dispatch(deleteImgInTextAC(id)),
     showAddNoteModal: () => dispatch(showAddNoteModalAC()),
     editNote: (id) => dispatch(editNoteAC(id)),
     saveEditedNote: (id) => dispatch(saveEditedNoteAC(id)),

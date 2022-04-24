@@ -8,11 +8,11 @@ function NoteHeader(props) {
     return <div style={inStyle}
                 className={`${props.titleStyles.join(" ")} ${fontStyles[props.note.titleFont.color]}`}>
         {props.note.edit ?
-            <textarea type="text"
-                      className={`${styles.headerEditing}  ${props.titleStyles.join(" ")} ${fontStyles[props.note.titleFont.color]}`}
-                      style={inStyle}
-                      value={props.note.title}
-                      onChange={props.onChange}/> :
+            <textarea placeholder={'Введите заголовок'}
+                className={`${styles.headerEditing}  ${props.titleStyles.join(" ")} ${fontStyles[props.note.titleFont.color]}`}
+                style={inStyle}
+                value={props.note.title}
+                onChange={props.onChange}/> :
             <p className={styles.header}>{props.note.title}</p>
         }
     </div>;

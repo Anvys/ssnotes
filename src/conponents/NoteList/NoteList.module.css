@@ -8,3 +8,12 @@
     flex-wrap: wrap;
     align-items: flex-start;
 }
+@media (max-width: 450px) {
+    .noteList{
+        display: flex;
+        /*gap: 10px;*/
+        flex-wrap: wrap;
+        /*align-items: center;*/
+        justify-content: center;
+    }
+}

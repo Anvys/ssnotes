@@ -20,18 +20,22 @@ const Note = (props) => {
         }
         return Styles;
     }
+
     return (
         <div style={{background: props.note.img !== null ? `url(${props.note.img}) center / cover no-repeat` : null}}
              className={props.note.edit ? `${styles.Note} ${styles.NoteEditing}` : styles.Note}>
             {
-                (props.note.edit || props.note.title !== "") &&
-                <NoteHeader note={props.note} titleStyles={parseFontStyles(props.note.titleFont, fontStyles)}
-                            onChange={onTitleChangeHandler}/>
+                (props.note.edit || props.note.title !== "")
+                && <NoteHeader note={props.note}
+                               titleStyles={parseFontStyles(props.note.titleFont, fontStyles)}
+                               onChange={onTitleChangeHandler}/>
             }
 
             {
                 props.note.edit && <EditNoteBar setImg={props.setImg}
                                                 deleteImg={props.deleteImg}
+                                                setImgInText={props.setImgInText}
+                                                deleteImgInText={props.deleteImgInText}
                                                 note={props.note}
                                                 editTarget={'header'}
                                                 selectEditTarget={props.selectEditTarget}
@@ -42,6 +46,8 @@ const Note = (props) => {
             {
                 props.note.edit && <EditNoteBar setImg={props.setImg}
                                                 deleteImg={props.deleteImg}
+                                                setImgInText={props.setImgInText}
+                                                deleteImgInText={props.deleteImgInText}
                                                 note={props.note}
                                                 editTarget={'description'}
                                                 selectEditTarget={props.selectEditTarget}
@@ -67,6 +73,8 @@ Note.propTypes = {
     deleteNote: PropTypes.func,
     setImg: PropTypes.func,
     deleteImg: PropTypes.func,
+    setImgInText: PropTypes.func,
+    deleteImgInText: PropTypes.func,
     showAddNoteModal: PropTypes.func,
     editNote: PropTypes.func,
     saveEditedNote: PropTypes.func,

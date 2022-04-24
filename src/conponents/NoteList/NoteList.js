@@ -5,30 +5,13 @@ import Note from "../Note/Note";
 
 
 const NoteList = (props) => {
+    // props.notesArr.map(item=>item.imgInText ? item : props.deleteImgInText(item.id))
     return (
         <div className={styles.block}>
             <div className={styles.noteList}>
                 {
-                    props.notesArr.map((note, id) => <Note
-                            {...props}
-                            note={note}
-                            key={id}
-                            // editInProgress={props.editInProgress}
-                            // changeDesk={props.changeDesk}
-                            // changeTitle={props.changeTitle}
-                            // deleteNote={props.deleteNote}
-                            // editNote = {props.editNote}
-                            // saveEditedNote = {props.saveEditedNote}
-                            // setImg = {props.setImg}
-                            // deleteImg = {props.deleteImg}
-                            // selectEditTarget = {props.selectEditTarget}
-                            // updateFont={props.updateFont}
-                            // updateTitleFont={props.updateTitleFont}
-                            // addNote = {props.addNote}
-                        />
-                    )
+                    props.notesArr.map((note, id) => <Note {...props} note={note} key={id}/>)
                 }
-
             </div>
         </div>
 
@@ -43,6 +26,8 @@ NoteList.propTypes = {
     deleteNote: PropTypes.func,
     setImg: PropTypes.func,
     deleteImg: PropTypes.func,
+    setImgInText: PropTypes.func,
+    deleteImgInText: PropTypes.func,
     showAddNoteModal: PropTypes.func,
     editNote: PropTypes.func,
     saveEditedNote: PropTypes.func,
