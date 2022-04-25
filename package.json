@@ -1,7 +1,7 @@
 {
   "name": "ssnotes",
   "version": "0.1.0",
-  "homepage": "https://anvys.github.io/ssnotes/",
+  "homepage": ".",
 
   "private": true,
   "dependencies": {
