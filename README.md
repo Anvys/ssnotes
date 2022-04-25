@@ -12,6 +12,10 @@ main source: https://github.com/Anvys/ssnotes/tree/main
 
 ## Available Scripts
 
+Afte clone:
+
+### `npm install`
+
 In the project directory, you can run:
 
 ### `npm start`
