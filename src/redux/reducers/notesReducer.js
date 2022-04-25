@@ -84,7 +84,7 @@ export const saveDataToFileAC = () => {
 }
 
 
-const createNoteObj = (id, title, description, dateStart = new Date(),
+const createNoteObj = (id, title, description, img = null, imgInText = null, dateStart = new Date(),
                        isDone = false, edit = false) => ({
     id,
     title,
@@ -92,8 +92,8 @@ const createNoteObj = (id, title, description, dateStart = new Date(),
     dateStart: dateStart.toLocaleString(),
     isDone,
     edit,
-    img: null,
-    imgInText: null,
+    img,
+    imgInText,
     editTarget: 'header',
     titleFont: {
         bold: false,
@@ -115,7 +115,21 @@ const createNoteObj = (id, title, description, dateStart = new Date(),
     },
 });
 const defNotesObj = {
-    notes: [createNoteObj(1, 'купить', 'купить хлеб'), createNoteObj(2, 'тоже купить', 'купить молоко'), createNoteObj(3, 'работа', 'дописать это'), createNoteObj(4, 'так', 'вот'),],
+    notes: [
+        createNoteObj(1, 'Обязательные требования:', ' - Создание одной простейшей заметки только с текстом.\n' +
+            ' - Редактирование заметки в окне собственного приложения.\n' +
+            ' - Сохранение заметки между сеансами приложения, в любом формате.\n' +
+            ' - При первом запуске, приложение должно иметь одну заметку с текстом.'),
+        createNoteObj(2, 'Желательно:', '\n' +
+            ' - Создание нескольких заметок в приложении.\n' +
+            ' - Выводить список существующих заметок.\n' +
+            ' - Возможность редактирования любой заметки из списка.\n' +
+            ' - Удаление заметок\n' +
+            ' - Также сохранять все заметки между сеансами.', 'https://www.4glaza.ru/images/articles/milky-way-galaxy-02.jpg', 'https://upload.wikimedia.org/wikipedia/ru/a/aa/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%A5%D0%9A_%D0%A1%D0%B5%D0%B2%D0%B5%D1%80%D1%81%D1%82%D0%B0%D0%BB%D1%8C.jpg'),
+        createNoteObj(3, 'Идеи для улучшения:', ' - Возможность выделять текст курсивом, жирным и т.п.\n' +
+            ' - Менять шрифт и размер текста.\n' +
+            ' - Вставка картинок.\n', 'https://bigpicture.ru/wp-content/uploads/2021/01/20142710133934.jpg'),
+    ],
     editInProgress: false,
     newNoteDesc: '',
     newNoteTitle: '',
@@ -131,7 +145,7 @@ let returnNewState = (newState) => {
 }
 
 let defaultState = (
-    localStorage.getItem('notes') === null || localStorage.getItem('notes') === 'undefined')
+    localStorage.getItem('notes') === null || localStorage.getItem('notes') === 'undefined') // || JSON.parse(localStorage.getItem('notes')).notes.length === 0
     ? initStorage()
     : JSON.parse(localStorage.getItem('notes'))
 
@@ -146,18 +160,14 @@ const saveDataToFile = (data) => {
     link.click();
 }
 const notesReducer = (state = defaultState, action) => {
-    // saveNotesToLS(state);
     switch (action.type) {
         case ADD_NOTE: {
-            // return state.newNoteDesc.trim()===""? state : {
-            // return state.editInProgress ? (state, alert('Сохраните редактируемую заметку') ) : {
             return returnNewState({
                 ...state,
                 notes: [...state.notes.map((note, id) => ({
                     ...note,
                     id: id
                 })), createNoteObj(state.notes.length + 1, state.newNoteTitle, state.newNoteDesc)
-                    // {id: state.notes.length + 1,title: state.newNoteTitle, description: state.newNoteDesc, isDone: false},
                 ],
                 newNoteDesc: "",
                 newNoteTitle: "",
@@ -171,7 +181,6 @@ const notesReducer = (state = defaultState, action) => {
                     ...note,
                     id: id
                 })), {...createNoteObj(state.notes.length + 1, state.newNoteTitle, state.newNoteDesc), edit: true}
-                    // {id: state.notes.length + 1,title: state.newNoteTitle, description: state.newNoteDesc, isDone: false},
                 ],
                 newNoteDesc: "",
                 newNoteTitle: "",
@@ -227,7 +236,6 @@ const notesReducer = (state = defaultState, action) => {
             });
         }
         case SET_IMG: {
-            // imgToState(action.img);
             return returnNewState({
                 ...state, notes: state.notes.map(note => (action.id === note.id ? {...note, img: action.img} : note))
             });
@@ -239,7 +247,8 @@ const notesReducer = (state = defaultState, action) => {
         }
         case SET_IMG_IN_TEXT: {
             return returnNewState({
-                ...state, notes: state.notes.map(note => (action.id === note.id ? {...note, imgInText: action.img} : note))
+                ...state,
+                notes: state.notes.map(note => (action.id === note.id ? {...note, imgInText: action.img} : note))
             });
         }
         case DELETE_IMG_IN_TEXT: {
@@ -281,7 +290,6 @@ const notesReducer = (state = defaultState, action) => {
         }
         default: {
             return state;
-            // return {...state, notes:state.notes.map(item=>({...item,imgInText: null}))};
         }
     }
 }

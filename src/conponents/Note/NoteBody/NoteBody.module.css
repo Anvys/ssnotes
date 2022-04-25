@@ -25,3 +25,9 @@
     background-color: rgba(255, 255, 255, 0.85);
 
 }
+
+.imgInText{
+    padding: 10px;
+    width: 100%;
+    border-radius: 20%;
+}

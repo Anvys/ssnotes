@@ -15,6 +15,7 @@
 .imgLoaderDiv{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 7px;
     /*gap: 30px;*/
     /*flex-direction: column;*/
 }
@@ -88,23 +89,6 @@
     cursor: pointer;
     margin: 0 3px 0 0;
 }
-
-
-/*.colorBtn{*/
-/*    background-color: #ffffff;*/
-/*    text-align: center;*/
-/*    width: 20px;*/
-/*    box-shadow: 2px 2px 1px 1px black;*/
-/*}*/
-/*.colorBtn:active{*/
-/*    position: relative;*/
-/*    top: 2px;*/
-/*    left: 2px;*/
-/*    border: 1px solid black;*/
-/*    box-shadow: 1px 1px 1px 1px black;*/
-/*}*/
-
-
 .bold{
     font-weight: bold;
 }
@@ -117,7 +101,6 @@
 .lineThrough{
     text-decoration: line-through;
 }
-
 .red{
     color: red;
 }
@@ -127,4 +110,10 @@
 .green{
     color: green;
 }
+@media (max-width: 450px) {
+    .imgLoaderDiv {
+        margin-bottom: 0;
+    }
+}
+
 

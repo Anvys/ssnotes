@@ -3,7 +3,7 @@ import notesReducer from "./reducers/notesReducer";
 
 
 let reducers = combineReducers({
-    NotesPage:notesReducer,
+    NotesPage: notesReducer,
 })
 let store = createStore(reducers);
 

@@ -4,7 +4,7 @@ import NoteListContainer from "./conponents/NoteList/NoteListContainer";
 import SideBarContainer from "./conponents/SideBar/SideBarContainer";
 import NavBar from "./conponents/NavBar/NavBar";
 
-//  "homepage": "https://anvys.github.io/ssnotes/",
+
 function App() {
     return (
         <div className="wrapper">

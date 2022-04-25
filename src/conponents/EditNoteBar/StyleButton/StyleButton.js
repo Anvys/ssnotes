@@ -1,4 +1,3 @@
-// import styles from "../EditNoteBar.module.css";
 import PropTypes from "prop-types";
 import React from "react";
 

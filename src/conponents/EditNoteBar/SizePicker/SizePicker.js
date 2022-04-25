@@ -45,6 +45,11 @@ const SizePicker = (props) => {
     );
 }
 
-SizePicker.propTypes = {};
+SizePicker.propTypes = {
+    curFont: PropTypes.object,
+    note: PropTypes.object,
+    updateFont: PropTypes.func,
+    editTarget: PropTypes.string,
+};
 
 export default SizePicker;

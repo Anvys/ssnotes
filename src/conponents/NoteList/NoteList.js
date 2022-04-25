@@ -5,7 +5,6 @@ import Note from "../Note/Note";
 
 
 const NoteList = (props) => {
-    // props.notesArr.map(item=>item.imgInText ? item : props.deleteImgInText(item.id))
     return (
         <div className={styles.block}>
             <div className={styles.noteList}>
@@ -14,7 +13,6 @@ const NoteList = (props) => {
                 }
             </div>
         </div>
-
     );
 }
 

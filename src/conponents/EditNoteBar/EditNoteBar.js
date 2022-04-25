@@ -4,11 +4,9 @@ import styles from './EditNoteBar.module.css';
 import ColorPicker from "./ColorPicker/ColorPicker";
 import SizePicker from "./SizePicker/SizePicker";
 import StyleButton from "./StyleButton/StyleButton";
-// import deletePicIcon from "../../assets/img/icons/fileRemove.svg";
-import deletePicInTextIcon from "../../assets/img/icons/imageSolid.svg";
-// import deletePicInTextIcon1 from "../../assets/img/icons/imageRegular.svg";
-import deletePicIcon from "../../assets/img/icons/fileImage.svg";
 import FontTypePicker from "./FontTypePicker/FontTypePicker";
+import deletePicInTextIcon from "../../assets/img/icons/imageSolid.svg";
+import deletePicIcon from "../../assets/img/icons/fileImage.svg";
 
 
 const EditNoteBar = (props) => {
@@ -35,7 +33,6 @@ const EditNoteBar = (props) => {
             reader.readAsDataURL(e.target.files[0]);
         }
     }
-
     const deleteImageInTextHandler = () => props.deleteImgInText(props.note.id);
     const onDescFontBoldUpdate = () => props.updateFont({
         ...curFont,
@@ -55,7 +52,6 @@ const EditNoteBar = (props) => {
         lineThrough: !curFont.lineThrough,
         underline: !curFont.lineThrough ? false : curFont.underline
     }, props.note.id, props.editTarget);
-    // debugger
     return (
         <div className={styles.bar}>
             <div className={styles.imgLoaderDiv}>
@@ -63,7 +59,7 @@ const EditNoteBar = (props) => {
                     props.editTarget === 'description' ?
                         props.note.img === null ?
                             <div>
-                                <label title={'Добавить фоновое изображение'}
+                                <label title={'Добавить фоновое изображение(< 10mb)'}
                                        className={styles.imgLabel} htmlFor={`${styles.imgLabel}-${props.note.id}`}/>
                                 <input id={`${styles.imgLabel}-${props.note.id}`}
                                        className={styles.load_img_input}
@@ -82,7 +78,7 @@ const EditNoteBar = (props) => {
                     props.editTarget === 'description'
                         ? props.note.imgInText === null
                             ? <div>
-                                <label title={'Добавить изображение в конец текста'}
+                                <label title={'Добавить изображение в конец текста (< 10mb)'}
                                        className={styles.imgLabelInText}
                                        htmlFor={`${styles.imgLabel}-InText-${props.note.id}`}/>
                                 <input id={`${styles.imgLabel}-InText-${props.note.id}`}

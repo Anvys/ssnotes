@@ -17,7 +17,7 @@ function NoteBody(props) {
         }
         {
             props.note.imgInText !== null
-                ? <img alt={'Image in text'} src={props.note.imgInText}/>
+                ? <img className={styles.imgInText} alt={'Image in text'} src={props.note.imgInText}/>
                 : null
         }
     </div>;
